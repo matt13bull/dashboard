@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Matt Laco Dashboard</title>
+  <style>
+    :root {
+      --bg: #0f172a; /* slate-900 */
+      --panel: #111827; /* gray-900 */
+      --text: #e5e7eb; /* gray-200 */
+      --muted: #94a3b8; /* slate-400 */
+      --accent: #3b82f6; /* blue-500 */
+      --accent2: #22c55e; /* green-500 */
+      --border: #1f2937; /* gray-800 */
+    }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Noto Sans", Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin:0; background: var(--bg); color: var(--text); }
+    header { padding: 24px; background: linear-gradient(90deg, #0f172a, #0b2545); border-bottom: 1px solid var(--border); }
+    header h1 { margin:0; font-size: 1.6rem; }
+    header p { margin:6px 0 0; color: var(--muted); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 16px 24px 32px; }
+
+    /* Tabs */
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 0; }
+    .tab-btn { cursor: pointer; border: 1px solid var(--border); background: var(--panel); color: var(--text); padding: 8px 12px; border-radius: 8px; font-weight: 600; }
+    .tab-btn.active { outline: 2px solid var(--accent); }
+
+    .tools { display:flex; gap:12px; align-items:center; margin: 8px 0 16px; }
+    .search { flex: 1; }
+    .search input { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border); background: #0b1220; color: var(--text); }
+    .count { color: var(--muted); font-size: 0.9rem; }
+
+    .tab { display: none; }
+    .tab.active { display: block; }
+
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+    .card h2 { margin: 0 0 8px; font-size: 1.2rem; }
+    .card p { margin: 0 0 12px; color: var(--muted); }
+
+    ul.links { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+    ul.links li { border: 1px dashed var(--border); border-radius: 10px; }
+    ul.links li a { display: block; padding: 10px 12px; text-decoration: none; color: var(--text); }
+    ul.links li a:hover { background: #0b1220; border-radius: 10px; }
+    .label { display:block; font-weight: 600; }
+    .meta { display:block; color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
+
+    footer { color: var(--muted); text-align:center; padding: 18px; border-top: 1px solid var(--border); }
+    code.inline { background: #0b1220; padding: 2px 6px; border-radius: 6px; border: 1px solid var(--border); }
+  
+/* === Quick Links grid layout fix === */
+.tab .card { width: 100%; }
+.tab .card ul.links { 
+  display: grid; 
+  grid-auto-flow: row; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 12px; 
+}
+
+
+
+.icon { margin-right: 8px; font-size: 1.2em; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Matt Laco Dashboard</h1>
+<!--<p>Quick launch for projects, specs, and admin docs. Edit this file to add your own links.</p> -->
+  </header>
+  <div class="container">
+    <nav class="tabs" role="tablist" aria-label="Dashboard tabs">
+      <button class="tab-btn" data-tab="laco">📶 Laco / Sales Links</button>
+      <button class="tab-btn" data-tab="r_d">🔨 R&D Links</button>
+      <button class="tab-btn" data-tab="inst">📠 Instruments Links</button>
+      <button class="tab-btn" data-tab="lab">🥼 Lab Links</button>
+      <button class="tab-btn" data-tab="computer">💻 Computer Links</button>
+      <button class="tab-btn active" data-tab="projects">📁 Projects</button>
+      <button class="tab-btn" data-tab="roadmaps">🗺️ Roadmaps</button>
+      <button class="tab-btn" data-tab="specs">📝 Specs</button>
+      <button class="tab-btn" data-tab="meetings">🗓️ Meetings</button>
+      <button class="tab-btn" data-tab="admin">⚙️ Admin</button>
+      <!-- <button class="tab-btn" data-tab="quick">⭐ Quick Links</button>  -->
+    </nav>
+
+    <div class="tools">
+      <div class="search"><input id="search" type="search" placeholder="Type to filter links in current tab…"></div>
+      <div class="count" id="count">Showing all</div>
+    </div>
+
+    <section class="tab active" id="projects" role="tabpanel">
+      <div class="card">
+        <h2>Active Projects</h2>
+        <p>Add your most-used project folders and docs.</p>
+        <ul class="links">
+          <li><a href="https://planner.cloud.microsoft" target="_blank" rel="noopener noreferrer"><span class="icon">🌐</span><span class="label">My Microsoft Tasks</span><span class="meta">Local</span></a></li>
+          <li><a href="https://appriver3651007166.sharepoint.com/:fl:/r/sites/CalibrationsTeam-MetquayImplementation/Shared%20Documents/Shared%20Documents/Metquay%20-%20Go%20Live%20Project.loop?d=w6528e7301a734f32a952f62f24ebe934&csf=1&web=1&e=DPWIIA" target="_blank" rel="noopener noreferrer"><span class="icon">🌐</span><span class="label">Metquay Team</span><span class="meta">Local</span></a></li>
+          <li><a href="https://appriver3651007166.sharepoint.com/sites/CalibrationsTeam-MetquayImplementation" target="_blank" rel="noopener noreferrer"><span class="icon">🌐</span><span class="label">Metquay Docs</span><span class="meta">Local</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="tab" id="roadmaps" role="tabpanel">
+      <div class="card">
+        <h2>Roadmaps</h2>
+        <p>Quarterly and annual roadmaps.</p>
+        <ul class="links">
+          <li><a href="file:///C:/RND/Roadmaps/2026_Q1.pptx"><span class="icon">📑</span><span class="label">2026 Q1 – Portfolio Roadmap</span><span class="meta">PowerPoint</span></a></li>
+          <li><a href="https://contoso.sharepoint.com/sites/RnD/Shared%20Documents/Roadmaps/Hardware_Roadmap.xlsx" target="_blank" rel="noopener noreferrer"><span class="icon">🌐</span><span class="label">Hardware Roadmap</span><span class="meta">SharePoint Excel</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="tab" id="specs" role="tabpanel">
+      <div class="card">
+        <h2>Specs & Docs</h2>
+        <p>Design specs, PRDs, test plans.</p>
+        <ul class="links">
+          <li><a href="file:///C:/RND/Specs/Widget_PRD.docx"><span class="icon">📝</span><span class="label">Widget PRD</span><span class="meta">Word</span></a></li>
+          <li><a href="file:///C:/RND/Specs/Widget_TestPlan.xlsx"><span class="icon">📊</span><span class="label">Widget Test Plan</span><span class="meta">Excel</span></a></li>
+          <li><a href="https://contoso.sharepoint.com/sites/RnD/Shared%20Documents/Specs/Firmware_API.pdf" target="_blank" rel="noopener noreferrer"><span class="icon">🌐</span><span class="label">Firmware API</span><span class="meta">PDF</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="tab" id="meetings" role="tabpanel">
+      <div class="card">
+        <h2>Meetings</h2>
+        <p>Weekly agendas, notes, and recurring links.</p>
+        <ul class="links">
+          <li><a href="https://teams.microsoft.com/l/channel/19%3Aexample%40thread.tacv2/General?groupId=example&tenantId=example" target="_blank" rel="noopener noreferrer"><span class="icon">🌐</span><span class="label">R&D Team Channel</span><span class="meta">Microsoft Teams</span></a></li>
+          <li><a href="file:///C:/RND/Meetings/Weekly_Agenda.docx"><span class="icon">📝</span><span class="label">Weekly Agenda</span><span class="meta">Word</span></a></li>
+          <li><a href="https://outlook.office.com/calendar/view/week" target="_blank" rel="noopener noreferrer"><span class="icon">🌐</span><span class="label">Outlook Calendar</span><span class="meta">Web</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="tab" id="admin" role="tabpanel">
+      <div class="card">
+        <h2>Admin & Operations</h2>
+        <p>Budgets, hiring, approvals, templates.</p>
+        <ul class="links">
+          <li><a href="file:///C:/RND/Admin/Budget_Tracker.xlsx"><span class="icon">📊</span><span class="label">Budget Tracker</span><span class="meta">Excel</span></a></li>
+          <li><a href="https://contoso.sharepoint.com/sites/RnD/Shared%20Documents/Templates" target="_blank" rel="noopener noreferrer"><span class="icon">🌐</span><span class="label">Doc Templates</span><span class="meta">SharePoint folder</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!--
+    <section class="tab" id="quick" role="tabpanel">
+      <div class="card">
+        <h2>Quick Links</h2>
+        <p>Drop your most-used links here.</p>
+        <ul class="links">
+          <li><a href="https://www.microsoft.com" target="_blank" rel="noopener noreferrer"><span class="icon">🌐</span><span class="label">Microsoft</span><span class="meta">Website</span></a></li>
+          <li><a href="https://www.microsoft.com" target="_blank" rel="noopener noreferrer"><span class="icon">🌐</span><span class="label">Microsoft</span><span class="meta">Website</span></a></li>
+          <li><a href="file:///C:/Users/YourName/Desktop"><span class="icon">🔗</span><span class="label">Desktop Folder</span><span class="meta">Local</span></a></li>
+          <li><a href="\\laclinux\erp\abasgui.exe"><span class="icon">🔗</span><span class="label">Desktop Folder</span><span class="meta">Local</span></a></li>
+          <li><a href="file:///C:/Projects/Alpha/DesignBrief.docx"><span class="icon">📝</span><span class="label">Alpha – Design Brief</span><span class="meta">Local path: C:/Projects/Alpha/DesignBrief.docx</span></a></li>
+          <li><a href="file:////fileserver/Projects/Beta/Plan.xlsx"><span class="icon">📊</span><span class="label">Beta – Plan</span><span class="meta">Network share: \\fileserver\Projects\Beta\Plan.xlsx</span></a></li>
+          <li><a href="https://contoso.sharepoint.com/sites/RnD/Shared%20Documents/Gamma%20Spec.docx" target="_blank" rel="noopener noreferrer"><span class="icon">🌐</span><span class="label">Gamma – Spec</span><span class="meta">SharePoint link</span></a></li>
+          <li><a href="https://onedrive.live.com/?cid=EXAMPLE&id=EXAMPLE&resid=EXAMPLE" target="_blank" rel="noopener noreferrer"><span class="icon">🌐</span><span class="label">Delta – Budget</span><span class="meta">OneDrive link</span></a></li>
+        </ul>
+      </div>
+    </section> -->
+
+    <section class="tab" id="laco" role="tabpanel">
+      <div class="card">
+        <h2>Quick Links</h2>
+        <p>Drop your most-used links here.</p>
+        <ul class="links">
+          <li><a href="file:///O:\Office\Monthly Company Meeting\Automated Reports\LACO_PERFORMANCE_DATA.2025.XLSX"><span class="icon">📊</span><span class="label">2025 Sales</span><span class="meta"></span></a></li>
+          <li><a href="file:///O:\Office\Monthly Company Meeting\Automated Reports\LACO_PERFORMANCE_DATA.2026.XLSX"><span class="icon">📊</span><span class="label">2026 Sales</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/sites/LTInstruments/Shared%20Documents/General/SMT-02-1003%20LT%20Instruments%20Price%20List.xlsx?d=wee25a10bbddc4778a98514e6237beef6&csf=1&web=1&e=hlxjIF"><span class="icon">📊</span><span class="label">Instrument Pricing</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/sites/CalibrationsTeam/Shared%20Documents/General/SMT-02-1004%20Lab%20Price%20List.xlsx?d=wc6bdab56c95a4c3b88d54d129e9ddf92&csf=1&web=1&e=prjqfb"><span class="icon">📊</span><span class="label">Lab Pricing</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/sites/LTInstruments/Shared%20Documents/General/SMT-02-1002%20Pricing%20Calculator.xlsx?d=w43f4f7df92a74a17a42cfd939024fc7b&csf=1&web=1&e=fiUNbV"><span class="icon">📊</span><span class="label">Pricing Tools - xlsx</span><span class="meta">Local</span></a></li>
+          <li><a href="https: tbd" target="_blank" rel="noopener noreferrer"><span class="icon">🔗</span><span class="label">Laco Dept Goals</span><span class="meta">Online Doc</span></a></li>
+          <li><a href="https://appriver3651007166.sharepoint.com/sites/LacoCentral/SitePages/Home(1).aspx" target="_blank" rel="noopener noreferrer"><span class="icon">🌐</span><span class="label">Laco Docs</span><span class="meta">Local</span></a></li>
+        </ul>
+      </div>
+    </section>
+    
+     <section class="tab" id="r_d" role="tabpanel">
+      <div class="card">
+        <h2>Quick Links</h2>
+        <p>Drop your most-used links here.</p>
+        <ul class="links">
+          <li><a href="ms-powerpoint:ofe|u|https://appriver3651007166.sharepoint.com/:p:/r/sites/management/Shared%20Documents/General/2026%20Planning/Department%20Plans/November%2013%20Presentations/R+D%20Presnenation%20Nov.%202025.pptx?d=w9c35dd4b75ff4c41aa9d724f9db078b0&csf=1&web=1&e=6wDA9C"><span class="icon">📑</span><span class="label">2026 R+D</span><span class="meta">Website</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/sites/RDTeam/Shared%20Documents/Research%20Dev%20Team/LACO%20R+D%20Projects%20V2.xlsx?d=wf6ad373e4c8e465195ed9b32327be062&csf=1&web=1&e=ZOG6Eg"><span class="icon">📊</span><span class="label">R+D Project List</span><span class="meta">Website</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/sites/RDTeam/Shared%20Documents/Research%20Dev%20Team/R+D%20time%20log%203.xlsx?d=w0907ca7676084a47b237b6e20e139652&csf=1&web=1&e=nbg4ir"><span class="icon">📊</span><span class="label">R+D Time Log</span><span class="meta">Website</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:p:/r/sites/RDTeam/Shared%20Documents/Research%20Dev%20Team/R+D%20Presnenation%20Nov.%202025.pptx?d=w2653c4710ef0491a8064f424c46e98ad&csf=1&web=1&e=4qDBio"><span class="icon">📊</span><span class="label">2026 R+D plan</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-access:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/EG/Common%20Eng%20Files/Laco%20Controller%20Database.xlsx?d=wc7c95135c01f45db928f28b3f849789d&csf=1&web=1"><span class="icon">🗄️</span><span class="label">Controller Database</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-access:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/EG/RD/Eng%20Calculations/Gas%20Flow%20-%20Eng.xlsx?d=wd49c5fa01b634c9099072e9ccd806fda&csf=1&web=1"><span class="icon">🗄️</span><span class="label">Gas Flow Eng</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/EG/RD/Eng%20Calculations/Linear%20Regression.xlsx?d=w60cf295eb90b4ca58a4314f6e956a258&csf=1&web=1"><span class="icon">📊</span><span class="label">Linear Regression</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/sites/LTInstruments/Shared%20Documents/General/Calculations%20-%20Laco.xlsx?d=wc41da5aba62c429787bb04bf9149a955&csf=1&web=1&e=DZWE2M"><span class="icon">📊</span><span class="label">Calcs Spreadsheet</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/EG/Engineering%20WIKI/Home.aspx"><span class="icon">📊</span><span class="label">Eng Wiki</span><span class="meta">Local</span></a></li>
+          <li><a href="https://lacotech.visualstudio.com/" target="_blank" rel="noopener noreferrer"><span class="icon">🌐</span><span class="label">Azure DevOps</span><span class="meta">Website</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="tab" id="inst" role="tabpanel">
+      <div class="card">
+        <h2>Quick Links</h2>
+        <p>Drop your most-used links here.</p>
+        <ul class="links">
+          <li><a href="ms-powerpoint:ofe|u|https://appriver3651007166.sharepoint.com/:p:/r/sites/management/Shared%20Documents/General/2026%20Planning/Product%20Roadmap%20and%20Plans/Leak%20Test%20Instruments/Instruments%202025%20-%20Product%20Manager%20Roadmap%20and%20Plan.pptx?d=wafd45838f9e84f2b8457f18122286a1d&csf=1&web=1&e=TkiRVh"><span class="icon">📑</span><span class="label">2026 Instruments Presentation</span><span class="meta">Website</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/sites/LTInstruments/Shared%20Documents/General/SMT-02-1003%20LT%20Instruments%20Price%20List.xlsx?d=wee25a10bbddc4778a98514e6237beef6&csf=1&web=1&e=hlxjIF"><span class="icon">📊</span><span class="label">Instrument Pricing</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/sites/LTInstruments/Shared%20Documents/General/SMT-02-1002%20Pricing%20Calculator.xlsx?d=w43f4f7df92a74a17a42cfd939024fc7b&csf=1&web=1&e=fiUNbV"><span class="icon">📊</span><span class="label">Pricing Tools - xlsx</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-access:ofe|u|file:///O:\Office\Configurator\MasterConfiguratorFiles\CG-LacoConfigurator.accdb"><span class="icon">🗄️</span><span class="label">Configurator</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-access:ofe|u|file:///O:\lab\Live Documents\Flow Calcs - Development.mdb"><span class="icon">🗄️</span><span class="label">Flow Calcs</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-access:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/EG/Common%20Eng%20Files/Laco%20Controller%20Database.xlsx?d=wc7c95135c01f45db928f28b3f849789d&csf=1&web=1"><span class="icon">🗄️</span><span class="label">Controller Database</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-access:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/EG/RD/Eng%20Calculations/Gas%20Flow%20-%20Eng.xlsx?d=wd49c5fa01b634c9099072e9ccd806fda&csf=1&web=1"><span class="icon">🗄️</span><span class="label">Gas Flow Eng</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/EG/RD/Eng%20Calculations/Linear%20Regression.xlsx?d=w60cf295eb90b4ca58a4314f6e956a258&csf=1&web=1"><span class="icon">📊</span><span class="label">Linear Regression</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/sites/LTInstruments/Shared%20Documents/General/Calculations%20-%20Laco.xlsx?d=wc41da5aba62c429787bb04bf9149a955&csf=1&web=1&e=DZWE2M"><span class="icon">📊</span><span class="label">Calcs Spreadsheet</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/EG/Engineering%20WIKI/Home.aspx"><span class="icon">📊</span><span class="label">Eng Wiki</span><span class="meta">Local</span></a></li>
+          <li><a href="https://lacotech.visualstudio.com/" target="_blank" rel="noopener noreferrer"><span class="icon">🌐</span><span class="label">Azure DevOps</span><span class="meta">Website</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="tab" id="lab" role="tabpanel">
+      <div class="card">
+        <h2>Quick Links</h2>
+        <p>Drop your most-used links here.</p>
+        <ul class="links">
+          <li><a href="ms-powerpoint:ofe|u|https://appriver3651007166.sharepoint.com/:p:/r/sites/management/Shared%20Documents/General/2026%20Planning/Product%20Roadmap%20and%20Plans/Leak%20Lab/Leak%20Standards%202025%20-%20Product%20Manager%20Roadmap%20and%20Plan.pptx?d=w453d4a3070ae45639e29286cfb25ed7f&csf=1&web=1&e=0zEDpM"><span class="icon">📑</span><span class="label">2026 Leak Lab Presentation</span><span class="meta">Website</span></a></li>
+          <li><a href="ms-powerpoint:ofe|u|https://appriver3651007166.sharepoint.com/:p:/r/sites/management/Shared%20Documents/General/2026%20Planning/Product%20Roadmap%20and%20Plans/Vac%20Gauge%20Lab/Gauge%20Lab%202025%20-%20Product%20Manager%20Roadmap%20and%20Plan.pptx?d=wf83a71fe7ca84b4fbb44c55bf4514608&csf=1&web=1&e=jYj61w"><span class="icon">📑</span><span class="label">2026 Gauge Lab Presentation</span><span class="meta">Website</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/sites/CalibrationsTeam/Shared%20Documents/General/SMT-02-1004%20Lab%20Price%20List.xlsx?d=wc6bdab56c95a4c3b88d54d129e9ddf92&csf=1&web=1&e=prjqfb"><span class="icon">📊</span><span class="label">Lab Pricing</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/sites/LTInstruments/Shared%20Documents/General/SMT-02-1002%20Pricing%20Calculator.xlsx?d=w43f4f7df92a74a17a42cfd939024fc7b&csf=1&web=1&e=fiUNbV"><span class="icon">📊</span><span class="label">Pricing Tools - xlsx</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-access:ofe|u|file:///O:\Office\Configurator\MasterConfiguratorFiles\CG-LacoConfigurator.accdb"><span class="icon">🗄️</span><span class="label">Configurator</span><span class="meta">Local</span></a></li>
+          <li><a href="https://laco.metquay.co/"><span class="icon">🔗</span><span class="label">Metquay demo</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-access:ofe|u|file:///C:/Users/YourName/Desktop"><span class="icon">🗄️</span><span class="label">Leak Database</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-access:ofe|u|file:///O:\lab\Live Documents\Flow Calcs - Development.mdb"><span class="icon">🗄️</span><span class="label">Flow Calcs</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-access:ofe|u|file:///C:\Users\mattc\OneDrive - LACO Technologies, Inc\Desktop\LQS-7-113.mdb"><span class="icon">🗄️</span><span class="label">Gauge Database</span><span class="meta">Local</span></a></li>
+          <li><a href="file:///C:/Users/YourName/Desktop"><span class="icon">🔗</span><span class="label">Lab Documentation Folder</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/sites/CalibrationsTeam/Shared%20Documents/General/Working%20Uncertainty.xlsx?d=w5581e5a6442d414ebc5120dacda339df&csf=1&web=1&e=nCymXb"><span class="icon">📊</span><span class="labeUncertal"></span>Uncertainty Calcs</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/EG/Common%20Eng%20Files/Laco%20Controller%20Database.xlsx?d=wc7c95135c01f45db928f28b3f849789d&csf=1&web=1"><span class="icon">📊</span><span class="label">Controller Database</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/EG/RD/Eng%20Calculations/Gas%20Flow%20-%20Eng.xlsx?d=wd49c5fa01b634c9099072e9ccd806fda&csf=1&web=1"><span class="icon">📊</span><span class="label">Gas Flow Eng</span><span class="meta">Local</span></a></li>
+          <li><a href="ms-excel:ofe|u|https://appriver3651007166.sharepoint.com/:x:/r/sites/LTInstruments/Shared%20Documents/General/Calculations%20-%20Laco.xlsx?d=wc41da5aba62c429787bb04bf9149a955&csf=1&web=1&e=DZWE2M"><span class="icon">📊</span><span class="label">Calcs Spreadsheet</span><span class="meta">Local</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="tab" id="computer" role="tabpanel">
+      <div class="card">
+        <h2>Meetings</h2>
+        <p>Weekly agendas, notes, and recurring links.</p>
+        <ul class="links">
+          <li><a href="\\laclinux\erp\abasgui.exe"><span class="icon">🔗</span><span class="label">Abas Live</span><span class="meta"></span></a></li>
+          <li><a href="https://appriver3651007166-my.sharepoint.com/:u:/r/personal/mattc_lacotech_com/Documents/Desktop/Abas.lnk?csf=1&web=1&e=hE2EXq"><span class="icon">🔗</span><span class="label">Abas Demo</span><span class="meta"></span></a></li>
+        </ul>
+      </div>
+    </section>
+
+
+    <section class="tab" id="roadmaps" role="tabpanel">
+      <div class="card">
+        <h2>Roadmaps</h2>
+        <p>Quarterly and annual roadmaps.</p>
+        <ul class="links">
+          <li><a href="file:///C:/RND/Roadmaps/2026_Q1.pptx"><span class="icon">📑</span><span class="label">2026 Q1 – Portfolio Roadmap</span><span class="meta">PowerPoint</span></a></li>
+          <li><a href=""C:\Users\mattc\OneDrive - LACO Technologies, Inc\Desktop\Abas.lnk"" target="_blank" rel="noopener noreferrer"><span class="icon">🌐</span><span class="label">Hardware Roadmap</span><span class="meta">SharePoint Excel</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+<!--
+  <div class="card" style="margin-top:16px">
+      <h2>How to customize</h2>
+      <p>
+        Edit this HTML file with Notepad or VS Code. To add a link, copy one of the existing
+        <code class="inline">&lt;li&gt;...&lt;/li&gt;</code> blocks and update the URL and label.
+      </p>
+      <ul>
+        <li><strong>Local files:</strong> use <code class="inline">file:///C:/path/to/file.docx</code></li>
+        <li><strong>Network share:</strong> use <code class="inline">file:////server/share/folder/file.xlsx</code></li>
+        <li><strong>OneDrive/SharePoint:</strong> paste the HTTPS link to the document or folder</li>
+      </ul>
+      <p>
+        Open this dashboard with Microsoft Edge and use <strong>⋯ → More tools → Pin to taskbar</strong> to have a one-click launcher.
+      </p>
+    </div>
+  </div>  
+  -->
+
+  <!--
+  <footer>
+    Dashboard is local to your PC (no upload). You can move the file anywhere—Desktop works great.
+  </footer>
+  -->
+
+  <script>
+    // Tab handling
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.tab');
+    const search = document.getElementById('search');
+    const count = document.getElementById('count');
+
+    function showTab(name) {
+      tabs.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === name));
+      panels.forEach(p => p.classList.toggle('active', p.id === name));
+      filterLinks();
+    }
+
+    tabs.forEach(btn => btn.addEventListener('click', () => showTab(btn.dataset.tab)));
+
+    function filterLinks() {
+      const activePanel = document.querySelector('.tab.active');
+      const q = search.value.trim().toLowerCase();
+      let shown = 0, total = 0;
+      activePanel.querySelectorAll('ul.links li').forEach(li => {
+        total++;
+        const text = li.textContent.toLowerCase();
+        const hit = !q || text.includes(q);
+        li.style.display = hit ? '' : 'none';
+        if (hit) shown++;
+      });
+      count.textContent = q ? `Showing ${shown} of ${total}` : 'Showing all';
+    }
+    search.addEventListener('input', filterLinks);
+
+    // Initialize
+    showTab('laco');
+  </script>
+</body>
+</html>
